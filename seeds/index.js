@@ -2,11 +2,32 @@ const mongoose = require("mongoose");
 const Campground = require("../models/campgrounds");
 const { places, descriptors } = require("./seedHelper");
 const cities = require("./cities");
+const { MongoClient } = require('mongodb');
+async function main() {
+  /**
+   * Connection URI. Update <username>, <password>, and <your-cluster-url> to reflect your cluster.
+   * See https://docs.mongodb.com/ecosystem/drivers/node/ for more details
+   */
+  const uri = process.env.DB_URL;
 
-mongoose
-  .connect("mongodb://127.0.0.1:27017/yelp-camp")
-  .then(console.log("Database Connected!"))
-  .catch(console.log("MEHHHHHH!?!"));
+
+  const client = new MongoClient(uri);
+
+  try {
+    // Connect to the MongoDB cluster
+    await client.connect();
+
+    // Make the appropriate DB calls
+    await listDatabases(client);
+
+  } catch (e) {
+    console.error(e);
+  } finally {
+    await client.close();
+  }
+}
+
+main().catch(console.error);
 
 const randElement = (array) => array[Math.floor(Math.random() * array.length)];
 const seedDB = async () => {

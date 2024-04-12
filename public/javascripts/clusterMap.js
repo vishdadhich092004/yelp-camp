@@ -1,5 +1,5 @@
 
-mapboxgl.accessToken = mapToken;
+mapboxgl.accessToken = process.env.MAPBOX_TOKEN;
 const map = new mapboxgl.Map({
     container: 'cluster-map',
     // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
@@ -7,7 +7,7 @@ const map = new mapboxgl.Map({
     center: [-103.5917, 40.6699],
     zoom: 4
 });
-map.addControl(new mapboxgl.NavigationControl(),'bottom-left');
+map.addControl(new mapboxgl.NavigationControl(), 'bottom-left');
 
 map.on('load', () => {
     // Add a new source from our GeoJSON data and
