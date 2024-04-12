@@ -2,32 +2,16 @@ const mongoose = require("mongoose");
 const Campground = require("../models/campgrounds");
 const { places, descriptors } = require("./seedHelper");
 const cities = require("./cities");
-const { MongoClient } = require('mongodb');
-async function main() {
-  /**
-   * Connection URI. Update <username>, <password>, and <your-cluster-url> to reflect your cluster.
-   * See https://docs.mongodb.com/ecosystem/drivers/node/ for more details
-   */
-  const uri = process.env.DB_URL;
 
 
-  const client = new MongoClient(uri);
+mongoose.connect(process.env.DB_URL);
 
-  try {
-    // Connect to the MongoDB cluster
-    await client.connect();
+const db = mongoose.connection;
 
-    // Make the appropriate DB calls
-    await listDatabases(client);
-
-  } catch (e) {
-    console.error(e);
-  } finally {
-    await client.close();
-  }
-}
-
-main().catch(console.error);
+db.on("error", console.error.bind(console, "connection error:"));
+db.once("open", () => {
+  console.log("Database connected");
+});
 
 const randElement = (array) => array[Math.floor(Math.random() * array.length)];
 const seedDB = async () => {

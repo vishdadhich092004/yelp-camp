@@ -1,7 +1,6 @@
 const campgrounds = require('../models/campgrounds');
 const User = require('../models/user');
 
-
 module.exports.renderRegister = (req, res) => {
     res.render('users/register');
 }
@@ -24,11 +23,12 @@ module.exports.renderLogin = (req, res) => {
     res.render('users/login');
 }
 module.exports.login = (req, res) => {
-    req.flash('success', "Welcome Back!");
+    req.flash('success', 'welcome back!');
     const redirectUrl = req.session.returnTo || '/campgrounds';
-    res.redirect('/campgrounds');
-    // res.redirect('/campgrounds');
+    delete req.session.returnTo;
+    res.redirect(redirectUrl);
 }
+
 module.exports.logout = (req, res, next) => {
     req.logout(function (err) {
         if (err) {
