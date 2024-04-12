@@ -1,0 +1,44 @@
+<% layout('layouts/boilerplate') %>
+  <div class="row">
+    <h1 class="text-center">New CampGround</h1>
+    <div class="col-6 offset-3">
+      <form action="/campgrounds" method="post" novalidate class="validated-form" enctype="multipart/form-data">
+        <div class="mb-3">
+          <label class="form-label" for="title">Title</label>
+          <input class="form-control" type="text" name="campground[title]" id="title" placeholder="Title" required />
+          <div class="valid-feedback">Looks Good!</div>
+        </div>
+        <div class="mb-3">
+          <label for="location" class="form-label">Location</label>
+          <input class="form-control" type="text" name="campground[location]" id="location" placeholder="Location"
+            required />
+          <div class="valid-feedback">Looks Good!</div>
+        </div>
+        <div class="mb-2">
+          <label for="image" id="image">Images</label>
+        </div>
+        <div class="input-group mb-3">
+          <input type="file" class="form-control" id="image" name="image" multiple>
+        </div>
+        <div>
+          <label for="price" class="form-label">Campground Price</label>
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text">$</span>
+          <input type="number" class="form-control" aria-label="price" required step="0.01" name="campground[price]" />
+          <div class="valid-feedback">Looks Good!</div>
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea class="form-control" type="text" name="campground[description]" id="description"
+            required></textarea>
+          <div class="valid-feedback">Looks Good!</div>
+        </div>
+        <div class="mb-3">
+          <button type="submit" class="btn btn-success">Create</button>
+          <button type="reset" class="btn btn-info">Reset</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <a href="/campgrounds">Go Home</a>
