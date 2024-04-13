@@ -6,10 +6,11 @@
 
         <h4 class="alert-heading">Unexpected Error</h4>
         <hr>
-        <% if (process.env.NODE_ENV !=='production' ) { <p>
-          <%=error.stack%>
-            </p>
-            } %>
+        <% if (process.env.NODE_ENV !=='production' ) { %>
+          <p>
+            <%=error.stack%>
+          </p>
+          <%} %>
 
       </div>
     </div>
